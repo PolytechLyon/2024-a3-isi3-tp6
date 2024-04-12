@@ -98,9 +98,10 @@ On voudrait donc centraliser le choix de la réalisation de l'interface `Logger`
 
 > **Exercise 6**
 > 
-> Utiliser le patron de conceptions **méthode de fabrique** pour centraliser le choix de réalisation de l'interface `Logger`.
+> Utiliser le patron de conceptions **méthode de fabrique** pour la création des logs.
+> Coupler ce patron avec singleton pour centraliser le choix de réalisation de l'interface `Logger`.
 > 
-> C'est quoi la difference entre cette méthode et le patron singleton ?
+> Pourquoi le patron singleton tout seul n'aurait pas suffi pour résoudre ce problème ?
 
 ## Journaux avec suivi du temps
 On souhaite faire en sorte que les journaux, peu importe leurs types, tracent à côte de chaque message l'heure précise à laquelle le message a été produit.
@@ -126,27 +127,7 @@ Observez le fichier [`fr.polytech.sim.cycling.Bike`](src/main/resources/META-INF
 > 
 > Quel patron de conception suit la classe `Context` vis-à-vis l'outil `ServiceLoader` ? 
 > 
-> Utilisez la classe utilitaire `Context` pour injecter un objet de type `Bike` dans la simulation, au lieu de l'instancier avec le mot clef `new`.
-> Changez la classe injectée de `SimpleBike` à `TagAlongBike`.
-> 
-> Peut-on avoir plusieurs lignes dans le fichier `fr.polytech.sim.cycling.Bike` ?
-> À quoi correspond chaque de ces lignes ?
-
-On souhaite maintenant que notre application puisse simuler plusieurs vélos.
-
-Notez que l'outil `ServiceLoader` supporte l'injection de plusieurs objets.
-La méthode souche `injectAll()` de la classe `Context` a pour objectif d'injecter plusieurs objets d'un type donné, si cela a été correctement configuré. 
-
-> **Exercice 9**
-> 
-> Observez le type de retour de la méthode `injectAll()`.
-> Quel patron de conception propose cette méthode pour parcourir tous les objets d'un type donné disponibles dans le contexte applicatif ?
-> 
-> Réaliser cette méthode en cohérence avec son objectif décrit ci-dessus et détaillé dans sa documentation.
-> 
-> Modifiez la simulation de vélo pour utiliser cette même méthode afin de simuler tous les types de vélo presénts dans la configuration.
-> Modifiez la configuration pour simuler et `SimpleBike` et `TagAlongBike`.
-
+> Utilisez la classe utilitaire `Context` pour injecter un objet de type `LoggerFactory` là où il est requis.
 
 [^1]: *Design Patters* en anglais.
 [^2]: *Logs* en anglais.
